@@ -1,16 +1,11 @@
 ---
-
+import BaseLayout from "../layouts/BaseLayout.astro";
+const pageTitle = "Home";
 ---
-
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>My blog</title>
-	</head>
-	<body>
-		<h1>My passion project blog</h1>
-	</body>
-</html>
+<BaseLayout pageTitle={pageTitle}>
+	<h2>Welcome to my passion project blog!</h2>
+	<p>
+		This is where I will post about my journey learning [subject passion
+		project].
+	</p>
+</BaseLayout>
