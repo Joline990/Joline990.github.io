@@ -1,8 +1,7 @@
 ---
 import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
 import "../styles/global.css";
-const {pageTitle} = Astro.props;
+const {pageTitle, homePage, pubDate} = Astro.props;
 ---
 
 <html lang="en">
@@ -14,9 +13,9 @@ const {pageTitle} = Astro.props;
         <title>{pageTitle}</title>
     </head>
     <body>
-        <Header />
-        <h1>{pageTitle}</h1>
-        <slot />
-        <Footer />
+        <Header pageTitle={pageTitle} homePage={homePage} pubDate={pubDate}/>
+        <main>
+            <slot />
+        </main>
     </body>
 </html>

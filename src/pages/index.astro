@@ -1,11 +1,21 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-const pageTitle = "Home";
+const pageTitle = "Exploring 3D Fractals";
+const allBlogPosts = await Astro.glob("./posts/post-*.md");
 ---
-<BaseLayout pageTitle={pageTitle}>
-	<h2>Welcome to my passion project blog!</h2>
-	<p>
-		This is where I will post about my journey learning [subject passion
-		project].
-	</p>
+<style>
+	a{
+		color: var(--color-text);
+	}
+	a:hover{
+		color: var(--color-primary);
+	}
+</style>
+<BaseLayout pageTitle={pageTitle} homePage={true}>
+	<h2>My fractal journey</h2>
+    <ul>
+		{allBlogPosts.map(blogpost => (
+			<li><a href={blogpost.url}>{blogpost.frontmatter.title} - {blogpost.frontmatter.pubDate}</a></li>
+		))}
+    </ul>
 </BaseLayout>

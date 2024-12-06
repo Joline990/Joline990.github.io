@@ -1,4 +1,48 @@
 ---
+const platform = "github";
+const username = "Joline990";
+const project = "3D_Fractals"
+const {pageTitle, homePage, pubDate} = Astro.props;
 ---
-<a href="/">Home</a>
-<a href="/blog/">Blog</a>
+<style>
+    header{
+        background-color: var(--color-light);
+        margin: calc(-1 * 1rem) calc(-1 * 12rem) 0 calc(-1 * 12rem);
+        padding: 1rem 12rem 0 12rem;
+        display: flex;
+        flex-direction: column;
+        gap: 8rem;
+    }
+    a{
+        text-decoration: none;
+        color: var(--color-dark);
+        font-weight: 700;
+    }
+    p{
+        color: var(--color-dark);
+    }
+    .info{
+        color: var(--color-primary);
+        padding: 0.5rem 0 2rem 0;
+    }
+    .info__link{
+        color: var(--color-primary);
+        text-decoration: underline;
+        font-weight: 600;
+    }
+</style>
+<header>
+    <nav>
+        <a href="/">BLOG</a>
+    </nav>
+    <div>
+        {homePage ? 
+        <p>Personal passion project</p>
+        <h1>{pageTitle}</h1>
+        <p class="info">Check out my project on <a class="info__link" href={`https://www.${platform}.com/${username}/${project}`}>{platform}</a>.</p>
+        :
+        <h1>{pageTitle}</h1>
+        <p class="info">Published: {pubDate}</p>
+        }
+    </div>
+</header>

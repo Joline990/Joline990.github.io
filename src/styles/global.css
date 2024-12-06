@@ -1,5 +1,72 @@
 @import url("./reset.css");
-/*add styling*/
-h1{
-    color: pink;
+
+@font-face {
+    font-family: 'Source Sans';
+    src: url("../fonts/SourceSans3-VariableFont_wght.woff2") format('woff2');
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Source Sans';
+    src: url("../fonts/SourceSans3-Italic-VariableFont_wght.woff2") format('woff2');
+    font-style: italic;
+}
+@font-face {
+    font-family: 'Raleway';
+    src: url("../fonts/Raleway-VariableFont_wght.woff2") format('woff2');
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Raleway';
+    src: url("../fonts/Raleway-Italic-VariableFont_wght.woff2") format('woff2');
+    font-style: italic;
+}
+:root{
+    --color-background: #FFFEFB;
+    --color-text: #20211F;
+    --color-primary: #7BBAA9;
+    --color-light: #E7FCF8;
+    --color-dark: #2A5D57;
+    --color-accent: #CD93F0;
+}
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-family: 'Source Sans';
+    font-style: normal;
+}
+
+body {
+    margin: 1rem 12rem;
+    font-size: 1.2rem;
+    line-height: 1.2;
+    background-color: var(--color-background);
+}
+main{
+    margin: 1rem 0;
+}
+h1, h2, h3{
+    color: var(--color-dark);
+    font-family: 'Raleway';
+}
+h1 {
+    font-weight: bold;
+    font-size: 4rem;
+}
+h2{
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin-top: 2rem;
+}
+h3{
+    margin-top: 1.2rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--color-primary);
+}
+p{
+    max-width: 66ch;
+    color: var(--color-text);
 }
