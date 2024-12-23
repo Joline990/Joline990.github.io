@@ -54,14 +54,16 @@ const validHeadings = headings.filter((heading) => heading.depth === 2 || headin
             }
             .sidebar{
                 padding: 1.5rem;
-                border-right: 0.1rem solid var(--color-primary);
+                border-left: 0.1rem solid var(--color-primary);
                 flex-shrink: 0;
-                position: sticky;
                 top: 1rem; /*zo niet aan bovenkant kleven*/
                 width: calc(100% - 3rem);
-    
+               
                 @media screen and (min-width: 768px){
+                    position: sticky;
                     max-width: 250px;
+                    border: none;
+                    border-right: 0.1rem solid var(--color-primary);
                 }
             }
             .sidebar__list{
