@@ -1,12 +1,8 @@
 ---
-import BaseLayout from "./BaseLayout.astro";
-const { frontmatter } = Astro.props;
+const { description } = Astro.props;
 ---
 
 <style>
-    * {
-        margin: 2rem 0;
-    }
     .description {
         font-style: italic;
         font-size: 1.5rem;
@@ -15,12 +11,5 @@ const { frontmatter } = Astro.props;
         padding-left: 1rem;
     }
 </style>
-
-<BaseLayout
-    pageTitle={frontmatter.title}
-    homePage={false}
-    pubDate={frontmatter.pubDate}
->
-    <p class="description">{frontmatter.description}</p>
+    {description?.trim() &&(<p class="description">{description}</p>)}
     <slot />
-</BaseLayout>

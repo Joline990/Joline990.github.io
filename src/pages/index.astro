@@ -1,21 +1,32 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
 const pageTitle = "Exploring 3D Fractals";
-const allBlogPosts = await Astro.glob("./posts/post-*.md");
+
+const allBlogPosts = await getCollection("blog");
 ---
+
 <style>
-	a{
+	a {
 		color: var(--color-text);
 	}
-	a:hover{
+	a:hover {
 		color: var(--color-primary);
 	}
 </style>
 <BaseLayout pageTitle={pageTitle} homePage={true}>
 	<h2>My fractal journey</h2>
-    <ul>
-		{allBlogPosts.map(blogpost => (
-			<li><a href={blogpost.url}>{blogpost.frontmatter.title} - {blogpost.frontmatter.pubDate}</a></li>
-		))}
-    </ul>
+	<ul>
+		{
+			allBlogPosts.map((blogpost) => (
+				<li>
+					<a href={`${blogpost.slug}/`}>
+						{blogpost.data.title} -{" "}
+						{blogpost.data.pubDate}
+					</a>
+				</li>
+			))
+		}
+	</ul>
 </BaseLayout>

@@ -1,0 +1,93 @@
+---
+import { type CollectionEntry, getCollection } from 'astro:content';
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BlogpostLayout from '../layouts/BlogpostLayout.astro';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('blog');
+	return posts.map((post) => ({
+		params: { slug: post.slug }, //dynamic render content
+		props: post,
+	}));
+}
+type Props = CollectionEntry<'blog'>;
+
+const post = Astro.props; //get post from getStaticPaths()
+const { Content, headings } = await post.render();
+const validHeadings = headings.filter((heading) => heading.depth === 2 || heading.depth === 3);
+---
+<BaseLayout pageTitle={post.data.title} homePage={false} pubDate={post.data.pubDate}>
+    <BlogpostLayout description={post.data.description}>
+        <div class="wrapper">
+            {
+                validHeadings.length > 0 && (
+                <nav class="sidebar">
+                    <small>Table of Contents</small>
+                    <ul>
+                        {
+                            validHeadings.map((heading) => <li class={`depth-${heading.depth}`}><a href={`#${heading.slug}`}>{heading.text}</a></li>)
+                        }
+                    </ul>
+                </nav>
+                )
+            }
+            <div class="content">
+                <Content />
+            </div>
+        </div>
+        <style>
+            .wrapper{
+                display: flex;
+                gap: 2rem;
+                flex-wrap: wrap;
+                align-items: flex-start;
+    
+                @media screen and (min-width: 768px){
+                    flex-wrap: nowrap;
+                }
+            }
+            small{
+                font-size: 1.2rem;
+                font-weight: bold;
+                color:var(--color-dark);
+            }
+            .sidebar{
+                padding: 1.5rem;
+                border-right: 0.1rem solid var(--color-primary);
+                flex-shrink: 0;
+                position: sticky;
+                top: 1rem; /*zo niet aan bovenkant kleven*/
+                width: calc(100% - 3rem);
+    
+                @media screen and (min-width: 768px){
+                    max-width: 250px;
+                }
+            }
+            ul{
+                font-size: 1rem;
+                padding-inline: 0;
+                list-style: none;
+                color: var(--color-primary);
+            }
+            li a{
+                text-decoration: none;
+                color: var(--color-primary);
+            }
+            li a:hover{
+                color: var(--color-dark);
+            }
+            .depth-2{
+                padding-top: 0.4rem;
+            }
+            .depth-3{
+                padding-left: 0.5rem;
+                list-style-type: disc;
+                list-style-position: inside;
+            }
+            .content{
+                display:grid;
+            }
+        </style>
+    </BlogpostLayout>
+</BaseLayout>
