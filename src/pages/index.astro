@@ -5,25 +5,84 @@ import { getCollection } from "astro:content";
 const pageTitle = "Exploring 3D Fractals";
 
 const allBlogPosts = await getCollection("blog");
+const checkLengthDescription = (description: string | any[]) => {
+	if (!description) {
+		return "";
+	} else {
+		return description.length > 120
+			? `${description.slice(0, 120)}...`
+			: description;
+	}
+};
 ---
 
 <style>
-	a {
+	.blogposts {
+		margin-top: 1rem;
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 2rem;
+		list-style: none;
+	}
+	.blogpost {
+		padding: 1rem;
+		border: 0.1rem solid var(--color-dark);
+		border-top: 2rem solid var(--color-primary);
+		border-radius: 0.5rem;
+		transition:
+			box-shadow 0.3s ease,
+			transform 0.3s ease;
+	}
+	.blogpost a {
+		text-decoration: none;
+	}
+	.blogpost:hover {
+		/*offset-x, offset-y, blur-radius, spread-radius*/
+		box-shadow: 4px 4px 4px 4px rgba(231, 252, 248, 0.8);
+		transform: translateY(-0.2rem);
+		border-color: var(--color-dark);
+	}
+	.blogpost div {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		height: 100%;
+	}
+	.blogpost__title {
+		margin: 0;
 		color: var(--color-text);
 	}
-	a:hover {
-		color: var(--color-primary);
+	.blogpost__description {
+		margin: 0.4rem 0 0 0;
+		flex-grow: 1;
+		font-size: 0.9rem;
+		color: rgba(32, 33, 31, 0.6);
+	}
+	.blogpost__date {
+		font-size: 0.8rem;
+		margin-top: 1rem;
 	}
 </style>
 <BaseLayout pageTitle={pageTitle} homePage={true}>
 	<h2>My fractal journey</h2>
-	<ul>
+	<ul class="blogposts">
 		{
 			allBlogPosts.map((blogpost) => (
-				<li>
+				<li class="blogpost">
 					<a href={`${blogpost.slug}/`}>
-						{blogpost.data.title} -{" "}
-						{blogpost.data.pubDate}
+						<div>
+							<h3 class="blogpost__title">
+								{blogpost.data.title}
+							</h3>
+							<p class="blogpost__description">
+								{checkLengthDescription(
+									`${blogpost.data.description}`,
+								)}
+							</p>
+							<p class="blogpost__date">
+								{blogpost.data.pubDate}
+							</p>
+						</div>
 					</a>
 				</li>
 			))

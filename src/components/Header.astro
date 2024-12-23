@@ -33,7 +33,7 @@ const {pageTitle, homePage, pubDate} = Astro.props;
 </style>
 <header>
     <nav>
-        <a href="/">BLOG</a>
+        <a href="/">{homePage ? "BLOG" : "← Back to overview"}</a>
     </nav>
     <div>
         {homePage ? 
