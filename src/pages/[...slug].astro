@@ -24,15 +24,15 @@ const validHeadings = headings.filter((heading) => heading.depth === 2 || headin
                 validHeadings.length > 0 && (
                 <nav class="sidebar">
                     <small>Table of Contents</small>
-                    <ul>
+                    <ul class="sidebar__list">
                         {
-                            validHeadings.map((heading) => <li class={`depth-${heading.depth}`}><a href={`#${heading.slug}`}>{heading.text}</a></li>)
+                            validHeadings.map((heading) => <li class={`list__item--depth-${heading.depth}`}><a href={`#${heading.slug}`} class="item__link">{heading.text}</a></li>)
                         }
                     </ul>
                 </nav>
                 )
             }
-            <div class="content">
+            <div class="content" >
                 <Content />
             </div>
         </div>
@@ -64,29 +64,26 @@ const validHeadings = headings.filter((heading) => heading.depth === 2 || headin
                     max-width: 250px;
                 }
             }
-            ul{
+            .sidebar__list{
                 font-size: 1rem;
                 padding-inline: 0;
                 list-style: none;
                 color: var(--color-primary);
             }
-            li a{
+            .item__link{
                 text-decoration: none;
-                color: var(--color-primary);
             }
-            li a:hover{
-                color: var(--color-dark);
-            }
-            .depth-2{
+            .list__item--depth-2{
                 padding-top: 0.4rem;
             }
-            .depth-3{
+            .list__item--depth-3{
                 padding-left: 0.5rem;
                 list-style-type: disc;
                 list-style-position: inside;
             }
             .content{
-                display:grid;
+                display: grid;
+                margin-bottom: 8rem;
             }
         </style>
     </BlogpostLayout>

@@ -24,11 +24,15 @@ My final customers will be STEAM enthusiasts (= Science Technology Engineering A
 - end result pictures
 ## Research sources
 Raluca Simion, M. (2016). Fractal Images – A New Way to Reduce Stress and To Improve Educational Workspaces. Global Journal of Psychology Research: New Trends and Issues, 6(1), 20. https://doi.org/10.18844/gjpr.v6i1.477
-
+\
+\
 Taylor, R. (2021). The Potential of Biophilic Fractal Designs to Promote Health and Performance: A Review of Experiments and Applications. Sustainability, 13(2), 823. https://doi.org/10.3390/su13020823
-
+\
+\
 Trombin, R., Terrapin Bright Green, Cost RESTORE Action, EURAC Research, International Living Future Institute, Living Future Europe, Terrapin Bright Green, Catherine Stolarski Design, Abboushi, B., Baraldo, L., Borel, B., Browning, B., Heerwagen, J., Nalin, G., Pei, K., Salingaros, N., Stolarski, C., Taylor, R., Walker, D., & Winer, E. (2020, December 31). Working with fractals: a resource for practitioners of biophilic design. Terrapin Bright Green. https://www.terrapinbrightgreen.com/wp-content/uploads/2020/12/Working-with-Fractals-by-Rita-Trombin_2021-01-29_TBG-COST-RESTORE.pdf
-
+\
+\
 Williams, F. (2017, January 26). The Atlantic. The Atlantic; theatlantic. https://www.theatlantic.com/science/archive/2017/01/why-fractals-are-so-soothing/514520/?source=post_page-----fccc08180d57--------------------------------
-
+\
+\
 How to Slash Stress Levels by 60% in a Matter of Seconds. (2020, July 7). ProjectX. https://www.projectxfactor.com/post/looking-at-fractals-reduce-stress-by-up-to-60

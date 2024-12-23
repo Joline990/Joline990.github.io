@@ -70,3 +70,16 @@ p{
     max-width: 66ch;
     color: var(--color-text);
 }
+li{
+    list-style-position: inside;
+}
+a{
+    color: var(--color-primary);
+}
+a:hover{
+    color: var(--color-dark);
+}
+strong{
+    font-weight: 600;
+    color: var(--color-accent);
+}
