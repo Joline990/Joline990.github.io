@@ -1,92 +1,144 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content';
+import { type CollectionEntry, getCollection } from "astro:content";
 
-import BaseLayout from '../layouts/BaseLayout.astro';
-import BlogpostLayout from '../layouts/BlogpostLayout.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import BlogpostLayout from "../layouts/BlogpostLayout.astro";
 
 export async function getStaticPaths() {
-	const posts = await getCollection('blog');
-	return posts.map((post) => ({
-		params: { slug: post.slug }, //dynamic render content
-		props: post,
-	}));
+    const posts = await getCollection("blog");
+    return posts.map((post) => ({
+        params: { slug: post.slug }, //dynamic render content
+        props: post,
+    }));
 }
-type Props = CollectionEntry<'blog'>;
+type Props = CollectionEntry<"blog">;
 
 const post = Astro.props; //get post from getStaticPaths()
 const { Content, headings } = await post.render();
-const validHeadings = headings.filter((heading) => heading.depth === 2 || heading.depth === 3);
+const validHeadings = headings.filter(
+    (heading) => heading.depth === 2 || heading.depth === 3,
+);
 ---
-<BaseLayout pageTitle={post.data.title} homePage={false} pubDate={post.data.pubDate}>
+
+<BaseLayout
+    pageTitle={post.data.title}
+    homePage={false}
+    pubDate={post.data.pubDate}
+>
     <BlogpostLayout description={post.data.description}>
         <div class="wrapper">
             {
                 validHeadings.length > 0 && (
-                <nav class="sidebar">
-                    <small>Table of Contents</small>
-                    <ul class="sidebar__list">
-                        {
-                            validHeadings.map((heading) => <li class={`list__item--depth-${heading.depth}`}><a href={`#${heading.slug}`} class="item__link">{heading.text}</a></li>)
-                        }
-                    </ul>
-                </nav>
+                    <nav class="sidebar sticky-active">
+                        <small>
+                            Table of Contents{" "}
+                            <button id="toggleTocBtn">hide</button>
+                        </small>
+                        <ul class="sidebar__list">
+                            {validHeadings.map((heading) => (
+                                <li
+                                    class={`list__item--depth-${heading.depth}`}
+                                >
+                                    <a
+                                        href={`#${heading.slug}`}
+                                        class="item__link"
+                                    >
+                                        {heading.text}
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                    </nav>
                 )
             }
-            <div class="content" >
+            <div class="content">
                 <Content />
             </div>
         </div>
         <style>
-            .wrapper{
+            .wrapper {
                 display: flex;
                 gap: 2rem;
                 flex-wrap: wrap;
                 align-items: flex-start;
-    
-                @media screen and (min-width: 768px){
+                margin-top: 2rem;
+
+                @media screen and (min-width: 1100px) {
                     flex-wrap: nowrap;
                 }
             }
-            small{
+            small {
                 font-size: 1.2rem;
                 font-weight: bold;
-                color:var(--color-dark);
+                color: var(--color-dark);
             }
-            .sidebar{
-                padding: 1.5rem;
+
+            .sidebar {
                 border-left: 0.1rem solid var(--color-primary);
+                padding-left: 1rem;
                 flex-shrink: 0;
-                top: 1rem; /*zo niet aan bovenkant kleven*/
+                top: 2rem; /* zo niet aan de bovenkant kleven */
                 width: calc(100% - 3rem);
-               
-                @media screen and (min-width: 768px){
-                    position: sticky;
+                position: static;
+            }
+
+            @media screen and (min-width: 1100px) {
+                .sidebar {
+                    border: none;
+                    padding-left: 0;
+                }
+                .sidebar.sticky-active {
+                    position: sticky; 
                     max-width: 250px;
                     border: none;
                     border-right: 0.1rem solid var(--color-primary);
                 }
             }
-            .sidebar__list{
+            .sidebar__list {
                 font-size: 1rem;
                 padding-inline: 0;
                 list-style: none;
                 color: var(--color-primary);
             }
-            .item__link{
+            .item__link {
                 text-decoration: none;
             }
-            .list__item--depth-2{
+            .list__item--depth-2 {
                 padding-top: 0.4rem;
             }
-            .list__item--depth-3{
+            .list__item--depth-3 {
                 padding-left: 0.5rem;
                 list-style-type: disc;
                 list-style-position: inside;
             }
-            .content{
+            .content {
                 display: grid;
                 margin-bottom: 8rem;
             }
         </style>
+        <script>
+            const $wrapper = document.querySelector(".wrapper") as HTMLElement;
+            const $sideBar = document.querySelector(".sidebar") as HTMLElement;
+            const $sideBarList = $sideBar.querySelector(".sidebar__list") as HTMLElement;
+            const $toggleTocBtn = document.getElementById("toggleTocBtn") as HTMLButtonElement;
+
+            const init = () => {
+                $toggleTocBtn.addEventListener("click", toggleToc);
+            };
+            const toggleToc = () => {
+                if ($sideBarList.style.display === "none") {
+                    $toggleTocBtn.textContent = "hide";
+                    $sideBarList.style.display = "block";
+                    $wrapper.style.flexDirection= "row";
+                    $sideBar.classList.add("sticky-active"); 
+                } else {
+                    $toggleTocBtn.textContent = "show";
+                    $sideBarList.style.display = "none";
+                    $wrapper.style.flexDirection= "column";
+                    $sideBar.classList.remove("sticky-active"); 
+                }
+            };
+            init();
+        </script>
     </BlogpostLayout>
 </BaseLayout>

@@ -7,11 +7,27 @@ const {pageTitle, homePage, pubDate} = Astro.props;
 <style>
     header{
         background-color: var(--color-light);
-        margin: calc(-1 * 1rem) calc(-1 * 12rem) 0 calc(-1 * 12rem);
-        padding: 1rem 12rem 0 12rem;
+        margin: calc(-1 * 1rem) calc(-1 * var(--marginLeftAndRight)) 0 calc(-1 * var(--marginLeftAndRight));
+        padding: 1rem var(--marginLeftAndRight) 0 var(--marginLeftAndRight);
         display: flex;
         flex-direction: column;
         gap: 8rem;
+
+        @media screen and (min-width: 700px){
+            --marginLeftAndRight: 4rem;
+            margin: calc(-1 * 1rem) calc(-1 * var(--marginLeftAndRight)) 0 calc(-1 * var(--marginLeftAndRight));
+            padding: 1rem var(--marginLeftAndRight) 0 var(--marginLeftAndRight);
+        }
+        @media screen and (min-width: 800px){
+            --marginLeftAndRight: 6rem;
+            margin: calc(-1 * 1rem) calc(-1 * var(--marginLeftAndRight)) 0 calc(-1 * var(--marginLeftAndRight));
+            padding: 1rem var(--marginLeftAndRight) 0 var(--marginLeftAndRight);
+        }
+        @media screen and (min-width: 1000px){
+            --marginLeftAndRight: 12rem;
+            margin: calc(-1 * 1rem) calc(-1 * var(--marginLeftAndRight)) 0 calc(-1 * var(--marginLeftAndRight));
+            padding: 1rem var(--marginLeftAndRight) 0 var(--marginLeftAndRight);
+        }
     }
     a{
         text-decoration: none;
