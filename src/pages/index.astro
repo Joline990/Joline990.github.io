@@ -4,7 +4,7 @@ import { getCollection } from "astro:content";
 
 const pageTitle = "Exploring 3D Fractals";
 
-const allBlogPosts = await getCollection("blog");
+//const allBlogPosts = await getCollection("blog");
 const checkLengthDescription = (description: string | any[]) => {
 	if (!description) {
 		return "";
@@ -14,6 +14,17 @@ const checkLengthDescription = (description: string | any[]) => {
 			: description;
 	}
 };
+const allBlogPosts = (await getCollection("blog")).sort((a, b) => {
+  const parseDate = (date: string) => {
+    const [day, month, year] = date.split("/").map((part) => parseInt(part, 10));
+    return new Date(year, month - 1, day);
+  };
+
+  const dateA = parseDate(a.data.pubDate);
+  const dateB = parseDate(b.data.pubDate);
+
+  return dateB.valueOf() - dateA.valueOf();
+});
 ---
 
 <style>

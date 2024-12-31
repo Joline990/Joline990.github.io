@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/BlogpostLayout.astro
 title: 'Research question'
-pubDate: 'December 6, 2024'
+pubDate: '06/12/2024'
 description: ''
 ---
 ## Core project statement
