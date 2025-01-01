@@ -11,17 +11,20 @@
     src: url("../fonts/SourceSans3-Italic-VariableFont_wght.woff2") format('woff2');
     font-style: italic;
 }
+
 @font-face {
     font-family: 'Raleway';
     src: url("../fonts/Raleway-VariableFont_wght.woff2") format('woff2');
     font-style: normal;
 }
+
 @font-face {
     font-family: 'Raleway';
     src: url("../fonts/Raleway-Italic-VariableFont_wght.woff2") format('woff2');
     font-style: italic;
 }
-:root{
+
+:root {
     --color-background: #FFFEFB;
     --color-text: #20211F;
     --color-primary: #7BBAA9;
@@ -31,6 +34,7 @@
 
     --marginLeftAndRight: 2rem;
 }
+
 * {
     box-sizing: border-box;
 }
@@ -47,77 +51,143 @@ body {
     line-height: 1.2;
     background-color: var(--color-background);
 
-    @media screen and (min-width: 700px){
+    @media screen and (min-width: 700px) {
         font-size: 1.2rem;
         --marginLeftAndRight: 4rem;
         margin: 1rem var(--marginLeftAndRight);
     }
-    @media screen and (min-width: 800px){
+
+    @media screen and (min-width: 800px) {
         --marginLeftAndRight: 6rem;
         margin: 1rem var(--marginLeftAndRight);
     }
-    @media screen and (min-width: 1000px){
+
+    @media screen and (min-width: 1000px) {
         --marginLeftAndRight: 12rem;
         margin: 1rem var(--marginLeftAndRight);
     }
 }
-main{
+
+main {
     margin: 1rem 0;
 }
-h1, h2, h3{
+
+h1,
+h2,
+h3 {
     color: var(--color-dark);
     font-family: 'Raleway';
 }
+
 h1 {
     font-weight: bold;
     font-size: 4rem;
 }
-h2{
+
+h2 {
     font-weight: 600;
     font-size: 1.5rem;
     margin-top: 2rem;
 }
-h3{
+
+h3 {
     margin-top: 1.2rem;
     font-size: 1.2rem;
     font-weight: 600;
     color: var(--color-primary);
 }
-p{
+
+p {
     max-width: 66ch;
     color: var(--color-text);
 }
-li{
+
+li {
     list-style-position: inside;
 }
-a{
+
+a {
     color: var(--color-primary);
 }
-a:hover{
+
+a:hover {
     color: var(--color-dark);
 }
-strong{
+img{
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+}
+
+figure img {
+    max-width: 320px; /*verkleinen*/
+}
+
+figure figcaption {
+    font-style: italic;
+    font-size: 1rem;
+    color: grey;
+    margin: 0.5rem 0 1.5rem 0;
+}
+
+strong {
     font-weight: 600;
     color: var(--color-accent);
 }
-button{
+
+button {
     font-size: 1rem;
     border: none;
     background-color: var(--color-background);
     color: var(--color-dark);
     cursor: pointer;
 }
-button::before{
+
+button::before {
     content: "[ ";
     color: var(--color-dark);
 }
-button::after{
+
+button::after {
     content: " ]";
     color: var(--color-dark);
 }
-button:hover{
+
+button:hover {
     color: var(--color-primary);
 }
-.content h2:first-of-type{
+
+blockquote {
+    background-color: var(--color-light);
+    color: var(--color-dark);
+    padding: 0.5rem 1rem;
+    margin: 1rem 0;
+    border: 0.1rem solid var(--color-primary);
+    border-radius: 0.5rem;
+}
+
+blockquote * {
+    color: var(--color-dark);
+}
+
+pre {
+    margin: 0.5rem 1rem 2rem 1rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 0.1rem solid grey;
+}
+code{
+    color: var(--color-accent);
+}
+.line {
+    font-size: .8rem;
+
+    @media screen and (min-width: 700px) {
+        font-size: 1rem;
+    }
+}
+
+.content h2:first-of-type {
     margin-top: 0;
 }

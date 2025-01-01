@@ -88,7 +88,7 @@ const validHeadings = headings.filter(
                     padding-left: 0;
                 }
                 .sidebar.sticky-active {
-                    position: sticky; 
+                    position: sticky;
                     max-width: 250px;
                     border: none;
                     border-right: 0.1rem solid var(--color-primary);
@@ -112,15 +112,18 @@ const validHeadings = headings.filter(
                 list-style-position: inside;
             }
             .content {
-                display: grid;
                 margin-bottom: 8rem;
             }
         </style>
         <script>
             const $wrapper = document.querySelector(".wrapper") as HTMLElement;
             const $sideBar = document.querySelector(".sidebar") as HTMLElement;
-            const $sideBarList = $sideBar.querySelector(".sidebar__list") as HTMLElement;
-            const $toggleTocBtn = document.getElementById("toggleTocBtn") as HTMLButtonElement;
+            const $sideBarList = $sideBar.querySelector(
+                ".sidebar__list",
+            ) as HTMLElement;
+            const $toggleTocBtn = document.getElementById(
+                "toggleTocBtn",
+            ) as HTMLButtonElement;
 
             const init = () => {
                 $toggleTocBtn.addEventListener("click", toggleToc);
@@ -129,13 +132,13 @@ const validHeadings = headings.filter(
                 if ($sideBarList.style.display === "none") {
                     $toggleTocBtn.textContent = "hide";
                     $sideBarList.style.display = "block";
-                    $wrapper.style.flexDirection= "row";
-                    $sideBar.classList.add("sticky-active"); 
+                    $wrapper.style.flexDirection = "row";
+                    $sideBar.classList.add("sticky-active");
                 } else {
                     $toggleTocBtn.textContent = "show";
                     $sideBarList.style.display = "none";
-                    $wrapper.style.flexDirection= "column";
-                    $sideBar.classList.remove("sticky-active"); 
+                    $wrapper.style.flexDirection = "column";
+                    $sideBar.classList.remove("sticky-active");
                 }
             };
             init();
