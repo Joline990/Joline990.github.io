@@ -25,14 +25,31 @@
 }
 
 :root {
+    /*colors*/
     --color-background: #FFFEFB;
     --color-text: #20211F;
+    --color-text-light: grey;
     --color-primary: #7BBAA9;
     --color-light: #E7FCF8;
     --color-dark: #2A5D57;
     --color-accent: #CD93F0;
 
+    /*spacing*/
+    --s-s: 0.5rem;
+    --s-0: 1rem;
+    --s-m: 2rem;
+
     --marginLeftAndRight: 2rem;
+
+    /*font-size*/
+    --fs-0: 1rem;
+    /*min. 1.5rem tot max. 4rem bij min-width: 320 en max-width 1240*/
+    /* @link https://utopia.fyi/clamp/calculator?a=320,1240,24—64 */
+    --fluid-24-64: clamp(1.5rem, 0.6304rem + 4.3478vw, 4rem);
+
+    /*borders*/
+    --fluid-border-width: clamp(0.05rem, 0.0326rem + 0.087vw, 0.1rem);
+    --fluid-border-radius: clamp(0.2rem, 0.0957rem + 0.5217vw, 0.5rem);
 }
 
 * {
@@ -46,30 +63,14 @@ html {
 }
 
 body {
-    margin: 1rem var(--marginLeftAndRight);
+    margin: var(--s-0) var(--marginLeftAndRight);
     font-size: .8rem;
     line-height: 1.2;
     background-color: var(--color-background);
-
-    @media screen and (min-width: 700px) {
-        font-size: 1.2rem;
-        --marginLeftAndRight: 4rem;
-        margin: 1rem var(--marginLeftAndRight);
-    }
-
-    @media screen and (min-width: 800px) {
-        --marginLeftAndRight: 6rem;
-        margin: 1rem var(--marginLeftAndRight);
-    }
-
-    @media screen and (min-width: 1000px) {
-        --marginLeftAndRight: 12rem;
-        margin: 1rem var(--marginLeftAndRight);
-    }
 }
 
 main {
-    margin: 1rem 0;
+    margin: var(--s-0) 0;
 }
 
 h1,
@@ -81,24 +82,24 @@ h3 {
 
 h1 {
     font-weight: bold;
-    font-size: 4rem;
+    font-size: var(--fluid-24-64);
 }
 
 h2 {
     font-weight: 600;
-    font-size: 1.5rem;
-    margin-top: 2rem;
+    font-size: var(--fs-0);
+    margin-top: var(--s-m);
 }
 
 h3 {
     margin-top: 1.2rem;
-    font-size: 1.2rem;
+    font-size: .9rem;
     font-weight: 600;
     color: var(--color-primary);
 }
 
 p {
-    max-width: 66ch;
+    max-width: 75ch;
     color: var(--color-text);
 }
 
@@ -113,7 +114,8 @@ a {
 a:hover {
     color: var(--color-dark);
 }
-img{
+
+img {
     width: 100%;
     height: auto;
     margin: 0 auto;
@@ -121,14 +123,15 @@ img{
 }
 
 figure img {
-    max-width: 320px; /*verkleinen*/
+    max-width: 320px;
+    /*verkleinen*/
 }
 
 figure figcaption {
     font-style: italic;
-    font-size: 1rem;
-    color: grey;
-    margin: 0.5rem 0 1.5rem 0;
+    font-size: var(--fs-0);
+    color: var(--color-text-light);
+    margin: var(--s-s) 0 1.5rem 0;
 }
 
 strong {
@@ -137,7 +140,7 @@ strong {
 }
 
 button {
-    font-size: 1rem;
+    font-size: var(--fs-0);
     border: none;
     background-color: var(--color-background);
     color: var(--color-dark);
@@ -158,13 +161,17 @@ button:hover {
     color: var(--color-primary);
 }
 
+input[type="radio"] {
+    display: none;
+}
+
 blockquote {
     background-color: var(--color-light);
     color: var(--color-dark);
-    padding: 0.5rem 1rem;
-    margin: 1rem 0;
-    border: 0.1rem solid var(--color-primary);
-    border-radius: 0.5rem;
+    padding: var(--s-s) var(--s-0);
+    margin: var(--s-0) 0;
+    border: var(--fluid-border-width) solid var(--color-primary);
+    border-radius: var(--fluid-border-radius);
 }
 
 blockquote * {
@@ -172,22 +179,63 @@ blockquote * {
 }
 
 pre {
-    margin: 0.5rem 1rem 2rem 1rem;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    border: 0.1rem solid grey;
+    margin: var(--s-s) var(--s-0) var(--s-m) var(--s-0);
+    padding: var(--s-0);
+    border-radius: var(--fluid-border-radius);
+    border: var(--fluid-border-width) solid var(--color-text-light);
 }
-code{
+
+code {
     color: var(--color-accent);
 }
+
 .line {
     font-size: .8rem;
-
-    @media screen and (min-width: 700px) {
-        font-size: 1rem;
-    }
 }
 
 .content h2:first-of-type {
     margin-top: 0;
+}
+
+
+@media screen and (min-width: 700px) {
+    body {
+        font-size: 1.2rem;
+        --marginLeftAndRight: 4rem;
+        margin: var(--s-0) var(--marginLeftAndRight);
+    }
+
+    h2 {
+        font-size: 1.5rem;
+        margin-top: var(--s-m);
+    }
+
+    h3 {
+        margin-top: 1.2rem;
+        font-size: 1.2rem;
+    }
+
+    .line {
+        font-size: var(--fs-0);
+    }
+}
+
+@media screen and (min-width: 800px) {
+    body {
+        --marginLeftAndRight: 6rem;
+        margin: var(--s-0) var(--marginLeftAndRight);
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    body {
+        --marginLeftAndRight: 12rem;
+        margin: var(--s-0) var(--marginLeftAndRight);
+    }
+}
+
+@container blogpost (min-width: 20rem) {
+    .blogpost__description {
+        font-size: var(--fs-0);
+    }
 }

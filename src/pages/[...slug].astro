@@ -26,7 +26,7 @@ const validHeadings = headings.filter(
     pubDate={post.data.pubDate}
 >
     <BlogpostLayout description={post.data.description}>
-        <div class="wrapper">
+        <div class="blog_content__wrapper">
             {
                 validHeadings.length > 0 && (
                     <nav class="sidebar sticky-active">
@@ -56,12 +56,12 @@ const validHeadings = headings.filter(
             </div>
         </div>
         <style>
-            .wrapper {
+            .blog_content__wrapper {
                 display: flex;
-                gap: 2rem;
+                gap: var(--s-m);
                 flex-wrap: wrap;
                 align-items: flex-start;
-                margin-top: 2rem;
+                margin-top: var(--s-m);
 
                 @media screen and (min-width: 1100px) {
                     flex-wrap: nowrap;
@@ -74,10 +74,10 @@ const validHeadings = headings.filter(
             }
 
             .sidebar {
-                border-left: 0.1rem solid var(--color-primary);
-                padding-left: 1rem;
+                border-left: var(--fluid-border-width) solid var(--color-primary);
+                padding-left: var(--s-0);
                 flex-shrink: 0;
-                top: 2rem; /* zo niet aan de bovenkant kleven */
+                top: var(--s-m); /* don't stick at top*/
                 width: calc(100% - 3rem);
                 position: static;
             }
@@ -91,11 +91,11 @@ const validHeadings = headings.filter(
                     position: sticky;
                     max-width: 250px;
                     border: none;
-                    border-right: 0.1rem solid var(--color-primary);
+                    border-right: var(--fluid-border-width) solid var(--color-primary);
                 }
             }
             .sidebar__list {
-                font-size: 1rem;
+                font-size: var(--fs-0);
                 padding-inline: 0;
                 list-style: none;
                 color: var(--color-primary);
@@ -116,7 +116,9 @@ const validHeadings = headings.filter(
             }
         </style>
         <script>
-            const $wrapper = document.querySelector(".wrapper") as HTMLElement;
+            const $wrapper = document.querySelector(
+                ".blog_content__wrapper",
+            ) as HTMLElement;
             const $sideBar = document.querySelector(".sidebar") as HTMLElement;
             const $sideBarList = $sideBar.querySelector(
                 ".sidebar__list",

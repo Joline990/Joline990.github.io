@@ -4,94 +4,256 @@ import { getCollection } from "astro:content";
 
 const pageTitle = "Exploring 3D Fractals";
 
-//const allBlogPosts = await getCollection("blog");
 const checkLengthDescription = (description: string | any[]) => {
 	if (!description) {
 		return "";
-	} else {
-		return description.length > 120
-			? `${description.slice(0, 120)}...`
-			: description;
 	}
+	return description.length > 120
+		? `${description.slice(0, 120)}...`
+		: description;
 };
 const allBlogPosts = (await getCollection("blog")).sort((a, b) => {
-  const parseDate = (date: string) => {
-    const [day, month, year] = date.split("/").map((part) => parseInt(part, 10));
-    return new Date(year, month - 1, day);
-  };
+	const parseDate = (date: string) => {
+		const [day, month, year] = date
+			.split("/")
+			.map((part) => parseInt(part, 10));
+		return new Date(year, month - 1, day);
+	};
 
-  const dateA = parseDate(a.data.pubDate);
-  const dateB = parseDate(b.data.pubDate);
+	const dateA = parseDate(a.data.pubDate);
+	const dateB = parseDate(b.data.pubDate);
 
-  return dateB.valueOf() - dateA.valueOf();
+	return dateB.valueOf() - dateA.valueOf();
 });
 ---
 
 <style>
-	.blogposts {
-		margin-top: 1rem;
-		display: grid;
+	.view_header {
+		margin-top: 2rem;
+		display: flex;
+		align-items: center;
 		gap: 1rem;
+	}
+
+	.view_header h2 {
+		margin-top: 0;
+	}
+
+	.view_header__options {
+		display: flex;
+		gap: 0.5rem;
+	}
+
+	.view_header__options *:hover {
+		cursor: pointer;
+	}
+
+	.blogposts {
+		margin-top: var(--s-0);
+	}
+
+	.blogpost a {
+		text-decoration: none;
+	}
+
+	.blogposts.list {
+		display: flex;
+		gap: 0.5rem;
+		flex-direction: column;
+		margin-left: 1rem;
+		color: var(--color-primary);
+	}
+	.blogposts.list .blogpost__date, .blogposts.list .blogpost__title {
+		color: var(--color-primary);
+	}
+	.blogposts.list div {
+		display: flex;
+		gap: 0.2rem;
+		align-items: center;
+	}
+
+	.blogposts.list .blogpost__title {
+		margin: 0;
+		font-weight: 500;
+	}
+	.blogposts.list .blogpost__title::after {
+		content: " - ";
+	}
+
+	.blogposts.list .blogpost {
+		list-style-position: outside;
+	}
+
+	.blogposts.list .blogpost:hover *, .blogposts.list .blogpost:hover::marker{
+		color: var(--color-dark);
+	}
+	
+	.blogposts.list .blogpost__description {
+		display: none;
+	}
+
+	.blogposts.grid {
+		display: grid;
+		gap: var(--s-0);
 		list-style: none;
 
-		@media screen and (min-width: 400px){
-			margin: 1rem 1rem;
+		@media screen and (min-width: 400px) {
+			margin: var(--s-0) var(--s-0);
 		}
-		@media screen and (min-width: 500px){
-			margin: 1rem 2rem;
+		@media screen and (min-width: 500px) {
+			margin: var(--s-0) var(--s-m);
 		}
-		@media screen and (min-width: 600px){
-			margin: 1rem 0 0 0;
+		@media screen and (min-width: 600px) {
+			margin: var(--s-0) 0 0 0;
 			grid-template-columns: repeat(2, 1fr);
 		}
 
-		@media screen and (min-width: 1200px){
-			gap: 2rem;
+		@media screen and (min-width: 1200px) {
+			gap: var(--s-m);
 			grid-template-columns: repeat(3, 1fr);
 		}
 	}
-	.blogpost {
-		padding: 1rem;
-		border: 0.1rem solid var(--color-dark);
-		border-top: 2rem solid var(--color-primary);
-		border-radius: 0.5rem;
+
+	.blogposts.grid .blogpost {
+		padding: var(--s-0);
+		border: var(--fluid-border-width) solid var(--color-dark);
+		border-top: var(--s-m) solid var(--color-primary);
+		border-radius: var(--fluid-border-radius);
+		container-type: inline-size;
+		container-name: blogpost;
 		transition:
 			box-shadow 0.3s ease,
 			transform 0.3s ease;
 	}
-	.blogpost a {
-		text-decoration: none;
-	}
-	.blogpost:hover {
+
+	.blogposts.grid .blogpost:hover {
 		/*offset-x, offset-y, blur-radius, spread-radius*/
 		box-shadow: 4px 4px 4px 4px rgba(231, 252, 248, 0.8);
 		transform: translateY(-0.2rem);
 		border-color: var(--color-dark);
 	}
-	.blogpost div {
+	.blogposts.grid .blogpost div {
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
 		height: 100%;
 	}
-	.blogpost__title {
+	.blogposts.grid .blogpost__title {
 		margin: 0;
 		color: var(--color-text);
 	}
-	.blogpost__description {
+	.blogposts.grid .blogpost__description {
 		margin: 0.4rem 0 0 0;
 		flex-grow: 1;
-		font-size: 0.9rem;
-		color: rgba(32, 33, 31, 0.6);
+		color: var(--color-text-light);
 	}
-	.blogpost__date {
+	.blogposts.grid .blogpost__date {
 		font-size: 0.8rem;
-		margin-top: 1rem;
+		margin-top: var(--s-0);
 	}
 </style>
 <BaseLayout pageTitle={pageTitle} homePage={true}>
-	<h2>My fractal journey</h2>
-	<ul class="blogposts">
+	<div class="view_header">
+		<h2>My fractal journey</h2>
+		<div class="view_header__options">
+			<label for="gridView" class="view_option" id="gridLabel">
+				<input type="radio" name="view" id="gridView" />
+				<svg
+					width="32"
+					height="32"
+					viewBox="0 0 32 32"
+					fill="none"
+					xmlns="http://www.w3.org/2000/svg"
+				>
+					<rect width="32" height="32" rx="2" fill="transparent"
+					></rect>
+					<rect
+						x="4"
+						y="4"
+						width="11.1429"
+						height="11.1429"
+						rx="1.71429"
+						fill="#2A5D57"></rect>
+					<rect
+						x="16.8572"
+						y="4"
+						width="11.1429"
+						height="11.1429"
+						rx="1.71429"
+						fill="#2A5D57"></rect>
+					<rect
+						x="16.8572"
+						y="16.8572"
+						width="11.1429"
+						height="11.1429"
+						rx="1.71429"
+						fill="#2A5D57"></rect>
+					<rect
+						x="4"
+						y="16.8572"
+						width="11.1429"
+						height="11.1429"
+						rx="1.71429"
+						fill="#2A5D57"></rect>
+				</svg>
+			</label>
+			<label for="listView" class="view_option" id="listLabel">
+				<input type="radio" name="view" id="listView" />
+				<svg
+					width="32"
+					height="32"
+					viewBox="0 0 32 32"
+					fill="none"
+					xmlns="http://www.w3.org/2000/svg"
+				>
+					<rect width="32" height="32" rx="2" fill="transparent"></rect>
+					<rect
+						x="9.14282"
+						y="14.6786"
+						width="18.8572"
+						height="3.42858"
+						rx="1.71429"
+						fill="#7BBAA9"></rect>
+					<rect
+						x="4"
+						y="14.6786"
+						width="3.42858"
+						height="3.42858"
+						rx="1.71429"
+						fill="#7BBAA9"></rect>
+					<rect
+						x="9.14282"
+						y="23.2501"
+						width="18.8572"
+						height="3.42858"
+						rx="1.71429"
+						fill="#7BBAA9"></rect>
+					<rect
+						x="4"
+						y="23.2501"
+						width="3.42858"
+						height="3.42858"
+						rx="1.71429"
+						fill="#7BBAA9"></rect>
+					<rect
+						x="9.14282"
+						y="6.10712"
+						width="18.8572"
+						height="3.42858"
+						rx="1.71429"
+						fill="#7BBAA9"></rect>
+					<rect
+						x="4"
+						y="6.10712"
+						width="3.42858"
+						height="3.42858"
+						rx="1.71429"
+						fill="#7BBAA9"></rect>
+				</svg>
+			</label>
+		</div>
+	</div>
+	<ul class="blogposts grid">
 		{
 			allBlogPosts.map((blogpost) => (
 				<li class="blogpost">
@@ -101,9 +263,7 @@ const allBlogPosts = (await getCollection("blog")).sort((a, b) => {
 								{blogpost.data.title}
 							</h3>
 							<p class="blogpost__description">
-								{checkLengthDescription(
-									`${blogpost.data.description}`,
-								)}
+								{checkLengthDescription(blogpost.data.description)}
 							</p>
 							<p class="blogpost__date">
 								{blogpost.data.pubDate}
@@ -114,4 +274,56 @@ const allBlogPosts = (await getCollection("blog")).sort((a, b) => {
 			))
 		}
 	</ul>
+	<script>
+		const $blogpostContainer = document.querySelector(".blogposts");
+		const $listIcon = document.getElementById("listLabel");
+		const $gridIcon = document.getElementById("gridLabel");
+
+		const init = () => {
+			document
+				.getElementById("listView")
+				.addEventListener("change", () => {
+					changeView("list");
+				});
+			document
+				.getElementById("gridView")
+				.addEventListener("change", () => {
+					changeView("grid");
+				});
+		};
+		const changeView = (option: string) => {
+			if (option === "list") {
+				$blogpostContainer.classList.remove("grid");
+				$blogpostContainer.classList.add("list");
+
+				$listIcon.querySelectorAll("rect").forEach((rect, index) => {
+					if (index !== 0) {
+						rect.setAttribute("fill", "#2A5D57");
+					}
+				});
+
+				$gridIcon.querySelectorAll("rect").forEach((rect, index) => {
+					if (index !== 0) {
+						rect.setAttribute("fill", "#7BBAA9");
+					}
+				});
+			} else if (option === "grid") {
+				$blogpostContainer.classList.remove("list");
+				$blogpostContainer.classList.add("grid");
+
+				$listIcon.querySelectorAll("rect").forEach((rect, index) => {
+					if (index !== 0) {
+						rect.setAttribute("fill", "#7BBAA9");
+					}
+				});
+
+				$gridIcon.querySelectorAll("rect").forEach((rect, index) => {
+					if (index !== 0) {
+						rect.setAttribute("fill", "#2A5D57");
+					}
+				});
+			}
+		};
+		init();
+	</script>
 </BaseLayout>
