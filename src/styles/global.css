@@ -102,6 +102,9 @@ p {
     max-width: 75ch;
     color: var(--color-text);
 }
+ul  ul{
+    margin-left: var(--s-0);
+}
 
 li {
     list-style-position: inside;
