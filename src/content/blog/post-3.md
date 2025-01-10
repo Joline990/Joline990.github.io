@@ -50,7 +50,8 @@ Fractals have multiple applications in different domains:
 - 💻 Development & Computer science
     - Creating textures and landscapes for video games and films that look extremely realistic
     - Jpeg compression → wasn’t a big hit
-    - Used in AI: image processing, speech recognition and machine learning.<br><br>
+    - Used in AI: image processing, speech recognition and machine learning.
+- 🧮 And, of course, Mathematics!<br><br>
 
 I already found some inspirational projects and will now break them down by sense.
 | Fractal project | 👂sound | 👀visual |👏touch |

@@ -33,7 +33,7 @@ He blends a shape with a 3d fractal using methods like intersection & revolution
       - “The value of the distance estimator tells you how large a step you are allowed to march along the ray, since you are guaranteed not to hit anything within this radius.”
       (http://blog.hvidtfeldts.net/index.php/2012/05/distance-estimated-3d-fractals-part-viii-epilogue/)
 ### Self-similarity
-Self-similarity is a key trait of fractals, but self-similarity alone doesn’t make a fractal (think of a line). Fractals have a fine structure at small scales (zoom-in) & can’t be described with Euclidean Geometry.
+Self-similarity is a key trait of fractals, but self-similarity alone doesn’t make a fractal (think of a line). Fractals have a fine structure at small scales (zoom-in) & can’t be described with Euclidean Geometry. Self-similarity literally means that it is similar to a part of itself, in every repetition (iteration) the same form returns. (updated: 10/01/2025).
 ### Recursion
 Recursion is the process of repeatedly applying a rule, indicating that the outcome of one iteration becomes the starting point for the next; the output of a process is fed back into the process itself, over and over again. In code you call a function inside a function (see example below).
 \
