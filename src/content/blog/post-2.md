@@ -18,6 +18,7 @@ description: 'This blog post lists in dots what I have been doing for the past t
   - Creating sounds in mandelbrot: https://www.youtube.com/watch?v=GiAj9WW1OfQ&list=PLh9DXIT3m6N7n4R60eJGPPPnn5LvTXQLY&index=8
   - Analog fractals with 1930’s technology: https://www.youtube.com/watch?v=Pv26QAOcb6Q&list=PLh9DXIT3m6N7n4R60eJGPPPnn5LvTXQLY&index=8
   - Changing fractal using shaders: https://mehmetcanakbay.github.io/oben_fractal-viewer/
+  - Marble marcher game in fractal landscape: https://codeparade.itch.io/marblemarcher
 - Tutorial I followed about someone who turns a 2d fractal into 3d using **shadertoy**: https://www.youtube.com/watch?v=__dSLc7-Cpo
 He blends a shape with a 3d fractal using methods like intersection & revolution.
 - Watched TED talk by the person who named the mandelbrot set: Benoit Mandelbrot.
@@ -82,6 +83,11 @@ The tutorial works with processing (https://processing.org/).
 - auto format code: edit > auto-format
 - P3D → kind of render mode for rendering 3d content; you also have a default renderer, PDF, P2D and SVG; this render mode makes use of OpenGL-compatible graphics hardware
 - maybe for future - connecting with Arduino: https://processing.org/tutorials/electronics/#code
+<figure>
+  <img src="/mandelbulb_tutorial.webp" alt="Mandelbulb trials in processing" title="Mandelbulb trials">
+  <figcaption>Mandelbulb trials in Processing</figcaption>
+</figure>
+
 ## Insight
 The period when people discovered and did the most with fractals is over, you can see this from the amount of articles you can find around 2008 - 2014 (a decade ago), but still some fractal artists make amazing things. It is not the easiest thing to do as it involves difficult maths and I myself am still learning all about this. But I want to try to make the most of it and see what I can do within this timeframe. Although I have to be aware that a full digital installation that is multi-sensory is too high, as was also mentioned at the first coaching moment. 
 \

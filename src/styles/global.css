@@ -181,6 +181,10 @@ blockquote * {
     color: var(--color-dark);
 }
 
+table, th, td{
+    border: var(--fluid-border-width) solid var(--color-text-light);
+    padding: 1rem;
+}
 pre {
     margin: var(--s-s) var(--s-0) var(--s-m) var(--s-0);
     padding: var(--s-0);
