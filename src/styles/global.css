@@ -97,7 +97,11 @@ h3 {
     font-weight: 600;
     color: var(--color-primary);
 }
-
+h4 {
+    margin-top: 1rem;
+    color: var(--color-dark);
+    font-weight: 600;
+}
 p {
     max-width: 75ch;
     color: var(--color-text);
@@ -105,7 +109,9 @@ p {
 ul  ul{
     margin-left: var(--s-0);
 }
-
+ul li{
+    padding: 0.2rem 0;
+}
 li {
     list-style-position: inside;
 }
