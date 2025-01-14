@@ -133,7 +133,6 @@ img {
 
 figure img {
     max-width: 320px;
-    /*verkleinen*/
 }
 
 figure figcaption {
@@ -244,6 +243,9 @@ code {
     body {
         --marginLeftAndRight: 12rem;
         margin: var(--s-0) var(--marginLeftAndRight);
+    }
+    figure img{
+        max-width: 600px;
     }
 }
 
