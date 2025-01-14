@@ -1,8 +1,8 @@
 ---
 layout: ../../layouts/BlogpostLayout.astro
-title: ''
+title: 'Decisions and creation of the Sierpinski Rhombus fractal'
 pubDate: '14/01/2025'
-description: ''
+description: 'After a week of researching, it is time to cut knots and make decisions on what I want this project to contain. I decide which fractals I want to focus on, because there are quite a few. And I make a 2d Sierpinski Rhombus fractal in which I share my process & reflection.'
 ---
 ## Something about the investigated fractals
 ### L-systems, Newton & Burnship fractal
@@ -93,12 +93,35 @@ Now that we have seen it mathematically, we can put everything together in Proce
 To see the code, go to my Github.
 
 ### Reflection
-Now that I put the code of the Sierpinski2 demo next to this one, they are very similar. So I had used this one as a reference, but had almost not looked at it. The only difference is that Sierpinski2 used triangles and now it uses diamonds.
+Now that I put the code of the Sierpinski2 demo next to this one, they are very similar. So I had used this one as a reference, but had almost not looked at it. The only difference is that Sierpinski2 used triangles and now it uses rhombuses.
 \
 \
-In hindsight, it was actually not difficult at all. The hardest part is finding the coordinates of the centres of the diamonds, but with the help of the two diagonals (I figured it out by myself!) it worked.
+In hindsight, it was actually not difficult at all. The hardest part is finding the coordinates of the centres of the rhombuses, but with the help of the two diagonals (I figured it out by myself!) it worked.
 
 <figure>
   <img src="/rhombus/endresult.png" alt="final result" title="Final result">
   <figcaption>Final result: from iteration 1 to 5.</figcaption>
 </figure>
+
+## Reformulating goal
+As I mentioned last week, I'm still a bit searching in terms of research question, end result.... After my afternoon walk, I decided to let go of the idea of working with different senses. It hindered me from coming up with new ideas because the visual is interwoven into everything and focusing on one sense remains difficult. 
+
+By scanning tutorials from TouchDesigner, I got the idea of making small fractal experiences with 3D fractals: making separate things to show fractals in different ways. This way, I can understand how fractals work and use them as an inspirational medium. My focus remains clear as a result. Above all, I want to explore and understand the potential of 3D fractals, as this is all new to me.
+
+Here I briefly note what has changed about the scope of the project, so that everything is clear.
+### Core project statement
+For my personal passion project, I want to explore the world of 3d fractals because I am fascinated by these endlessly repeating patterns. I want to explore how different software platforms can transform the representation of 3D fractals into small-scale fractal experiences. 
+
+This project focuses on the potential of 3d fractals and demonstrates their versatility for STEAM enthusiasts. While it is fascinating to know that fractals have a connection to human well-being, this project highlights the creative and technical potential of fractals rather than their therapeutic applications.
+### Research question
+How can we code a 3D fractal experience that provides (real-time) visual and auditory feedback tailored to the user’s interactions?
+### End result - deliverables
+To be determined later: a technical report or a small fractal experience (simple version).
+## Further
+Furthermore, I already did some research on how to print a 3d fractal just by programming (i.e. not ‘designing’, as in TinkerCad, Blender...). And defined a workflow for it based on the information I could find.
+\
+\
+Next big steps:
+- Coding 3d fractal & 3d print it
+- Sources I've saved take a closer look & understand around fractal trees in TouchDesigner & try to make it myself.
+- Looking at other software where you can make 3d fractals that react in real time.
