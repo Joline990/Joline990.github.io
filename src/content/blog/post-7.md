@@ -31,9 +31,13 @@ I decided to delve further into **Sierpinski fractals**, i.e. fractal where a si
 > **But for me it's new**, so I want to learn it. I don't want to copy code, because otherwise I won't learn anything either. 
 
 I was already looking at & programming the Sierpinski Triangle, and had found in my research that there are several variations (see blog post:  <a href="/post-5/">Sierpinski, trees & fractal dimension</a>). I looked at those variations to see if there was anything fun to do with them. Just following tutorial and writing code along, I didn't want that. I really wanted to understand it.
-\
-\
-I saw how 2 Sierpinski Triangles were positioned underneath each other to form a diamond. From this, I came up with a challenge for myself: 
+<br><br>
+<figure>
+  <img src="/rhombus/reference.svg" alt="reference image" title="inspiration source">
+  <figcaption>Left: 2 Sierpinski triangle form a rhombus, right: my idea.</figcaption>
+</figure>
+I saw how 2 Sierpinski Triangles were positioned underneath each other to form a rhombus. From this, I came up with a challenge for myself: 
+
 > **#Challenge 1 - Sierpinski Rhombus fractal**: Program (first in Processing) a rhombus dividing it x-number of times into 9 equal rhombuses and remove the middle one. While doing so, make sketches so I can also explain to someone else exactly what is happening mathematically (e.g. why that number and not another?).
 >
 No examples of this fractal could be found online 🙂. So that was good. Even though I know it will look very similar to the Sierpinski Carpet.
@@ -93,3 +97,8 @@ Now that I put the code of the Sierpinski2 demo next to this one, they are very 
 \
 \
 In hindsight, it was actually not difficult at all. The hardest part is finding the coordinates of the centres of the diamonds, but with the help of the two diagonals (I figured it out by myself!) it worked.
+
+<figure>
+  <img src="/rhombus/endresult.png" alt="final result" title="Final result">
+  <figcaption>Final result: from iteration 1 to 5.</figcaption>
+</figure>
