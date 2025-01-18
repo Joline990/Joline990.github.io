@@ -1,8 +1,8 @@
 ---
 layout: ../../layouts/BlogpostLayout.astro
-title: 'From 2d to 3d'
+title: 'From 2d to 3d [PART 1]'
 pubDate: '18/01/2025'
-description: 'In this blog post, I share my steps on how to transform a 2d Sierpinski Rhombus fractal to 3d. First, I drew a cube and then a rhombus in Python. Next, I first create a menger sponge and then apply the same technique for the rhombus.'
+description: 'In this blog post, I share my steps on how to transform a 2d Sierpinski Rhombus fractal to 3d. First, I drew a cube and then a rhombus in Python. Next, I first create a menger sponge and then I apply the same technique for the rhombus.'
 ---
 ## Cube
 ### Step 1: basic setup
@@ -287,6 +287,13 @@ We had **three inputs** for our function that hold the logic, also called our re
 - size of shape -> cube will be 1/3 smaller -> we need to add the size to the new coordinates
 - current level / current iteration / current recursion -> however you call it; Instead of adding our iteration, we define how many levels there should be and then we go to zero by minus 1 each time. If the level is 0, we draw our shape.
 
+### Change coordinates
+We can't use coordinates like (-1, 0, 1), because we scale our cube, so the coordinates change depending on the size & there place in the grid. Therefore we write the coordinates like this:
+<figure>
+    <img src="/menger_sponge_flexible_coordinates.svg" alt="menger sponge flexible coordinates" title="Flexible coordinates">
+</figure>
+Don't forget to make changes as well inside the faces array.
+
 ### Which cubes should we remove?
 First, let's look at this from a **2d perspective**. We already know that we first need to **divide our square into 9 equal squares** and then remove the middle square. We can create an imaginary grid of 9 squares by looping over the range [0, 3[. 
 <figure>
@@ -346,8 +353,6 @@ We use a for loop to check these values. The computer may not add a cube with tw
 > - A **continue** statement will ensure when a condition is true, that it will not execute the lower code.
 >
 > (https://www.digitalocean.com/community/tutorials/how-to-use-break-continue-and-pass-statements-when-working-with-loops-in-python-3)
-\
-\
 ```python
     for dimension_x in range(3):
             for dimension_y in range(3):
