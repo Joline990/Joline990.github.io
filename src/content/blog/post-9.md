@@ -2,7 +2,7 @@
 layout: ../../layouts/BlogpostLayout.astro
 title: 'From 2d to 3d'
 pubDate: '18/01/2025'
-description: 'In this blog post, I share my steps on how to transform a 2d Sierpinski Rhombus fractal to 3d. First, I drew a cube and then a rhombus in Python. Next, I first create a blender sponge and then apply the same technique for the rhombus. This is work of 2.5 days.'
+description: 'In this blog post, I share my steps on how to transform a 2d Sierpinski Rhombus fractal to 3d. First, I drew a cube and then a rhombus in Python. Next, I first create a menger sponge and then apply the same technique for the rhombus.'
 ---
 ## Cube
 ### Step 1: basic setup
@@ -99,6 +99,13 @@ Using add_collection3d & Poly3DCollection is something I saw when searching for 
     fig.patch.set_facecolor('Cyan') #bg color - outside plot
 ```
 ### Some comments
+#### Change limits of axes
+To make all axes go from -1 to 1, we use:
+```python
+    ax.set_xlim([-1, 1])
+    ax.set_ylim([-1, 1])
+    ax.set_zlim([-1, 1])
+```
 #### Change aspect ratio size
 <figure>
     <img src="/cube/axes_equal.png" alt="before and after axes aspect ratio in matplotlib" title="Before & after">
@@ -255,3 +262,130 @@ And there is our rhombohedron!
         Right: different perspective; yes, it is flat on the ground!
     </figcaption>
 </figure>
+
+## Menger sponge
+The menger sponge is the **Sierpinski carpet** in 3d.
+\
+\
+I found this <a href="https://www.researchgate.net/publication 381418345_Representing_the_Menger_Sponge_Using_Tuples_A_Computational_and_Educational_Approach">paper</a> & will try to understand step by step what exactly is happening and will note this in more detail. When I didn't know what it was, I searched for resources.
+\
+\
+To create a Menger sponge fractal, we need to write a **recursive function** that removes the middle square.
+### Reuse logic from 2d
+Let's take a look at how we created the Sierpinski Triangle & Sierpinski Rhombus. 
+> **Little note**: the Sierpinski Carpet I have not coded, but is same principle. I had created the Sierpinski Triangle & Sierpinski Rhombus in Processing, so syntax is different, but logic is similar.
+
+We had 3 functions:
+- function that was responsible for setup.
+- function that hold the logic which shape should not be drawn (the middle shape)
+    - In this function, it was important that we did **not keep going infinitely**, but that there is a limit to it. 
+    - And we kept going to the **centre of our drawn shapes** to then scale the shape by some factor.
+- function that draws all shapes that are allowed to be drawn
+
+We had **three inputs** for our function that hold the logic, also called our recursive function:
+- coordinates middle point
+- size of shape -> cube will be 1/3 smaller -> we need to add the size to the new coordinates
+- current level / current iteration / current recursion -> however you call it; Instead of adding our iteration, we define how many levels there should be and then we go to zero by minus 1 each time. If the level is 0, we draw our shape.
+
+### Which cubes should we remove?
+First, let's look at this from a **2d perspective**. We already know that we first need to **divide our square into 9 equal squares** and then remove the middle square. We can create an imaginary grid of 9 squares by looping over the range [0, 3[. 
+<figure>
+    <img src="/2d_grid_loop.svg" alt="how a 2d grid is created when looping" title="2d grid">
+    <figcaption>Creation of a grid of 9 squares when looping over the range [0, 3[.</figcaption>
+</figure>
+
+In Python, we cannot work with a `for(let x = 0; x < 2; x++){...}`, (we could do it, but is cumbersome) so we do this with a range.
+```python
+    for dimension_x in range(3):
+            for dimension_y in range(3):
+                    print(dimension_x, dimension_y)
+```
+When running our Python script, we see in our terminal:
+<figure>
+    <img src="/print_grid_coordinates.png" alt="terminal values" title="Terminal">
+</figure>
+First a new y-value is added for all x = 0, then for all x = 1 and then for all x = 2. First the left column is drawn from top to bottom, then the middle & then the last.
+
+> 🧠 **Insight**: the first coordinate adjusts only when we have been to the **deepest level**.
+
+Our **middle square** is then (1,1) -> So... if x = 1 & y = 1, we need to remove it.
+\
+\
+But what in 3d? Let's find out using the same method.
+\
+We saw in 2d that the first coordinate adjusts only when we have been to the deepest level. So we can already know that first for all x = 0 and y = 0 a new z-value will be added. We will find 1, 1, 1 in the middle. We can remove these if x = 1 & y = 1 & z = 1. But looking at images of a menger sponge, we need to remove more than that...
+
+<figure>
+    <img src="/menger_sponge_iterations.jpeg" alt="how a 2d grid is created when looping" title="2d grid">
+    <figcaption>Figure from: https://mathsmodels.co.uk/2021/04/01/MengerSponge/</figcaption>
+</figure>
+
+...also the middle square of each face. So a plus shape is actually removed in 3d.
+\
+\
+We already know from 2d that two values are then equal to 1 (e.g. x = 1 & z = 1). Normally this should occur 6 times (since we have 6 faces).
+\
+\
+The possibilities (for x, y, z with values between [0, 3[ )
+- x = 1, y = 1, z = 0
+- x = 1, y = 1, z = 1 → we exclude this one, because is our middle square of cube & we already have it
+- x = 1, y = 1, z = 2
+- x = 0, y = 1, z = 1
+- x = 2, y = 1, z = 1
+- x = 1, y = 0, z = 1
+- x = 1, y = 2, z = 1
+
+So if at least 2 values are equal to 1, then the cube must be removed.
+\
+\
+We use a for loop to check these values. The computer may not add a cube with two values equal to 1 to the plot, in any other case it does. We use ‘continue’ and not ‘break’ for this. 
+
+>**Difference between break & continue**
+>
+> - A **break** statement will make sure when a condition is completed it stops executing the loop.
+> - A **continue** statement will ensure when a condition is true, that it will not execute the lower code.
+>
+> (https://www.digitalocean.com/community/tutorials/how-to-use-break-continue-and-pass-statements-when-working-with-loops-in-python-3)
+\
+\
+```python
+    for dimension_x in range(3):
+            for dimension_y in range(3):
+                for dimension_z in range(3):
+                    if (dimension_x == 1 and dimension_y == 1) or (dimension_y == 1 and dimension_z == 1) or (dimension_x == 1 and dimension_z == 1):
+                        continue
+```
+After `continue` we add a function to recall the function again with the new values.
+\
+\
+We save all our cubes in an array, that we'll use for display all the cubes by iterating over the array (for loop). To add those cubes, I refer to the code from the paper where they featured **extend()**. I found that you can also use append() to add something to an array. So I tried this. But this didn't work because they are 2 different things. To illustrate this, I made a small demo.
+```python
+    red_fruits = ['🍉', '🍓']
+    green_fruits = ['🥝', '🍐']
+    orange_fruits = ['🍊', '🍑']
+
+    red_fruits.append(green_fruits)
+    print("append() method:", red_fruits)
+
+    orange_fruits.extend(green_fruits)
+    print("extend() method:", orange_fruits)
+    
+    #in my terminal
+    append() method: ['🍉', '🍓', ['🥝', '🍐']]
+    extend() method: ['🍊', '🍑', '🥝', '🍐']
+```
+With append() the array is added into the array, but with append() the brackets are deleted.
+\
+\
+I also got other errors, like this one:
+```
+    cubes.append(generate_menger_sponge(x + dimension_x * new_size, y + dimension_y * new_size, z + dimension_z * new_size, new_size, current_iteration + 1))
+                    
+    RecursionError: maximum recursion depth exceeded while calling a Python object
+
+    [Previous line repeated 992 more times]
+    
+    -> solved by: + replaced by -, because we give the maximum number of iterations at the beginning. So we have to count down the number of iterations and not add up.
+    -> I adapted the term current_iteration to current_level to clarify.
+```
+This recursive function for generating smaller and smaller cubes, we set up as 1 function and a second function to start drawing the cube with the same logic as described above for ‘cube’.
