@@ -113,7 +113,8 @@ ul li{
     padding: 0.2rem 0;
 }
 li {
-    list-style-position: inside;
+    list-style-position: outside;
+    margin-left: var(--s-0);
 }
 
 a {
@@ -130,7 +131,9 @@ img {
     margin: 0 auto;
     display: block;
 }
-
+figure{
+    margin: var(--s-s) 0;
+}
 figure img {
     max-width: 320px;
 }
