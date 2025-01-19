@@ -394,3 +394,7 @@ I also got other errors, like this one:
     -> I adapted the term current_iteration to current_level to clarify.
 ```
 This recursive function for generating smaller and smaller cubes, we set up as 1 function and a second function to start drawing the cube with the same logic as described above for ‘cube’.
+<figure>
+  <img src="/menger_sponge_level3.png" alt="Menger sponge at iteration 3" title="Iteration 3">
+  <figcaption>Menger sponge at iteration 3</figcaption>
+</figure>
