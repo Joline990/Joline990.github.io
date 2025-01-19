@@ -3,6 +3,7 @@ layout: ../../layouts/BlogpostLayout.astro
 title: 'From 2d to 3d [PART 2]'
 pubDate: '19/01/2025'
 description: 'In this blog post, I share my steps on how to transform a 2d Sierpinski Rhombus fractal to 3d. First, I drew a cube and then a rhombus in Python. Next, I first create a menger sponge and then I apply the same technique for the rhombus.'
+
 ---
 ## Rhombohedron fractal
 In part 1, I shared how to create a rhombohedron fractal in two ways. We continue with the rhombohedron fractal we created in method 2. By three vectors (e1, e2, e3) coming from (0,0,0) we can determine all our vertices. 
