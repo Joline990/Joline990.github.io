@@ -42,7 +42,25 @@ Different articles gave different techniques how to optimize in Python.
 - **Change Matplotlib by other library** like PyOpenGL, Panda3D, VisPy → more efficient 3d rendering (https://medium.com/@alexeyyurasov/3d-modeling-with-python-c21296756db2)
 
 I tried using **PyOpenGL with PyGame** instead of Matplotlib. But the computer was running slower. When I asked this in forums, **shaders** was named among other things so that it can be run on the GPU instead of the CPU. At the moment, it seems very complicated to work with this.
-<br><br>
+```python
+    # basic pygame window setup
+    import pygame
+
+    pygame.display.set_caption("Menger Sponge")
+    screen = pygame.display.set_mode((600,600))
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+        
+        #update stuff
+        screen.fill((255,255,255))
+        # draw stuff
+
+        pygame.display.update()
+```
 
 - Maybe coding in C for faster results?? -> Python is slower than **compiled languages** like C++ or Java, but it is simpler to use & rapid development
 <br><br>
