@@ -82,3 +82,109 @@ Also, the rhombohedrons are now all separate and do not form 1 mesh (see image b
 <figure>
   <img src="/rhombohedron/blender.png" alt="Rhombohedron fractal in Blender" title="Rhombohedron fractal in Blender">
 </figure>
+
+--- update 1 February 2025 ---
+
+I'm from the future here for a while, as there was another step-by-step here, but had not noted it down below. Hence a **step-by-step plan** to create a **rhombohedron in blender's python api**.
+### Step by step
+
+#### 1. Setup project
+1. Install Blender (https://www.blender.org/download/)
+2. When you open Blender, you will see some shapes, remove them by typing A + X + D.
+3. At the top of the navigation bar, click ‘scripting’.
+4. Import bpy module
+    
+    ```python
+    import bpy
+    ```
+    
+    This module allows Python to interact with Blender.
+
+#### 2. Write down the coordinates of the vertices & faces
+We use the formula for generating a rhombohedron where the vectors e1, e2 & e3 arise from the point (0, 0, 0). Thus, all the vertices can be calculated (see in a previous blog post).
+
+```python
+import math #don't forget to import math - else error: NameError: name 'math' is not defined.
+
+theta = math.pi/3
+
+origin_vertices = [
+    [1, 0, 0], # e1
+    [math.cos(theta), math.sin(theta), 0], # e2
+    [math.cos(theta), (math.cos(theta) - (math.cos(theta) ** 2))/math.sin(theta), (math.sqrt(1 - 3 * math.cos(theta) ** 2 + 2 * math.cos(theta)**3))/math.sin(theta)] # e3
+]
+
+vertices = [
+    [0,0,0], 
+    origin_vertices[1],
+    [origin_vertices[0][0] + origin_vertices[1][0], origin_vertices[0][1] + origin_vertices[1][1], origin_vertices[0][2] + origin_vertices[1][2]],
+        origin_vertices[0],
+        origin_vertices[2], 
+    [origin_vertices[1][0] + origin_vertices[2][0], origin_vertices[1][1] + origin_vertices[2][1], origin_vertices[1][2] + origin_vertices[2][2]],
+    [origin_vertices[0][0] + origin_vertices[1][0] + origin_vertices[2][0], origin_vertices[0][1] + origin_vertices[1][1] + origin_vertices[2][1], origin_vertices[0][2] + origin_vertices[1][2] + origin_vertices[2][2]],
+    [origin_vertices[0][0] + origin_vertices[2][0], origin_vertices[0][1] + origin_vertices[2][1], origin_vertices[0][2] + origin_vertices[2][2]]
+]
+
+faces = [
+    (0,1,2,3),
+    (0,3,7,4),
+    (4,5,6,7),
+    (1,2,6,5),
+    (2,3,7,6),
+    (0,1,5,4),
+]
+
+edges = []
+```
+
+#### 3. Create a mesh object
+Now we do not yet see our points, so we have not yet added them to our ‘canvas’. Code from https://www.youtube.com/watch?v=mN3n9b98HMk
+
+```python
+mesh_data = bpy.data.meshes.new("rhombohedron_data")
+mesh_data.from_pydata(vertices, edges, faces)
+ 
+mesh_obj = bpy.data.objects.new("rhombohedron_object", mesh_data)
+ 
+bpy.context.collection.objects.link(mesh_obj)
+```
+
+#### 4. Change faces
+Run the script by clicking the play button (or option + P). We see our rhombohedron.
+\
+\
+But... we need to make sure the **faces are oriented correctly**, as this makes a difference when rendering shadows & light and so on. To find out if the faces are correctly placed, follow these steps:
+1. Click on your shape. You will now see an orange border.
+2. Click edit mode.
+3. Click face orientation.
+<br><br>
+
+Turn your shape around and see if the **outer faces are all blue**. Are all your faces blue? Then you may proceed to step 5. Otherwise, place the vertices in the faces in the other direction.
+
+> **Tip**: turn on developer mode to see the indices.
+>
+> → To turn it on: edit > preferences > interface > display > developer extras.
+
+To check, run your script again (first remove everything from canvas (make sure you're in object mode): A + X + D and click on play button). If the face changes red and blue, then the order of your vertices in the faces is not quite right. 
+
+#### 5. Draw function
+Let's write what we are drawing now into a function with more flexible values.
+
+```python
+def create_rhombohedron(new_x, new_y, new_z, new_size):
+    vertices = [
+                [new_x, new_y, new_z], 
+                [new_x + new_size * origin_vertices[1][0], new_y + new_size * origin_vertices[1][1], new_z + new_size * origin_vertices[1][2]],
+                [new_x + new_size * (origin_vertices[0][0] + origin_vertices[1][0]), new_y + new_size * (origin_vertices[0][1] + origin_vertices[1][1]), new_z + new_size * (origin_vertices[0][2] + origin_vertices[1][2])],
+                [new_x + new_size * origin_vertices[0][0], new_y + new_size * origin_vertices[0][1], new_z + new_size * origin_vertices[0][2]],
+                [new_x + new_size * origin_vertices[2][0], new_y + new_size * origin_vertices[2][1], new_z + new_size * origin_vertices[2][2]],
+                [new_x + new_size * (origin_vertices[1][0] + origin_vertices[2][0]), new_y + new_size * (origin_vertices[1][1] + origin_vertices[2][1]), new_z + new_size * (origin_vertices[1][2] + origin_vertices[2][2])],
+                [new_x + new_size * (origin_vertices[0][0] + origin_vertices[1][0] + origin_vertices[2][0]), new_y + new_size * (origin_vertices[0][1] + origin_vertices[1][1] + origin_vertices[2][1]), new_z + new_size * (origin_vertices[0][2] + origin_vertices[1][2] + origin_vertices[2][2])],
+                [new_x + new_size * (origin_vertices[0][0] + origin_vertices[2][0]), new_y + new_size * (origin_vertices[0][1] + origin_vertices[2][1]), new_z + new_size * (origin_vertices[0][2] + origin_vertices[2][2])]
+    ]
+    # ...more code below
+  
+create_rhombohedron(0,0,0,1) # call function
+```
+#### 6. Recursive function
+Let's turn the rhombohedron into a fractal by adding a recursive function. We copy this code from our rhombohedron fractal demo from python.

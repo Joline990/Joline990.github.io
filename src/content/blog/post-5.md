@@ -69,6 +69,7 @@ To do this, we first need to know the coordinates of our triangle.
   <img src="/sierpinski_coordinates.webp" alt="Calculation coordinates triangle" title="Math">
   <figcaption>Calculation of all necessary coordinates to centre triangle on our canvas.</figcaption>
 </figure>
+
 The y-coordinate is more difficult to calculate, but for this we can use the sine of an acute angle in a **rectangular triangle**.
 
 We can draw the triangle using triangle() where we can include all the coordinates.

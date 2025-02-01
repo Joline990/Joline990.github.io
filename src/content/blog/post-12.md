@@ -85,7 +85,7 @@ for rhombohedron in rhombohedrons:
 Already searched for interactivity in blender, but haven't found anything yet, **some loose stuff** like how to add a material to an object, for example.
 
 ### Why Blender Python Api?
-- Handing to see **real-time changes** in a **3d environment**, which uses a **3d engine**. 
+- Useful to see **real-time changes** in a **3d environment**, which uses a **3d engine**. 
 - But **harder if interaction takes place outside Blender** such as a midi controller, then it is better for a standalone Python project.
 
 ### Debug environment

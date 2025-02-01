@@ -214,8 +214,7 @@ As I said above, we can add vectors. Tip: e1, e2 & e3 are vectors. There are sev
 V = e1 + e3’
 but... e3 = e3’
 so V = e1 + e3
-\
-\
+<br>
 Calculate now the other coordinates with vectors.
 <figure>
     <img src="/rhombohedron/rhombohedron2_step4.svg" alt="rhombohedron in Python using matplotlib" title="Step 4">
@@ -267,7 +266,7 @@ And there is our rhombohedron!
 The menger sponge is the **Sierpinski carpet** in 3d.
 \
 \
-I found this <a href="https://www.researchgate.net/publication 381418345_Representing_the_Menger_Sponge_Using_Tuples_A_Computational_and_Educational_Approach">paper</a> & will try to understand step by step what exactly is happening and will note this in more detail. When I didn't know what it was, I searched for resources.
+I found this <a href="https://www.researchgate.net/profile/Douglas-Youvan/publication/381418345_Representing_the_Menger_Sponge_Using_Tuples_A_Computational_and_Educational_Approach/links/666c5b61de777205a32c631d/Representing-the-Menger-Sponge-Using-Tuples-A-Computational-and-Educational-Approach.pdf">paper</a> & will try to understand step by step what exactly is happening and will note this in more detail. When I didn't know what it was, I searched for resources.
 \
 \
 To create a Menger sponge fractal, we need to write a **recursive function** that removes the middle square.

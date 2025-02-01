@@ -73,8 +73,8 @@ Let's draw the little rhombus at the top (coloured in figure) in two different w
 As we remove the middle rhombus each time, we move our centre from the original rhombus to the newly created rhombus (see above). This way, our calculations are not unnecessarily complicated. 
 <figure>
   <img src="/rhombus/lettersystem-rhombus.svg" alt="Starting on top, then going clockwise for each letter (A -> H). Inside the middle rhombus is 'remove' written." title="Lettersystem">
-  <figcaption> Left: centres of the panes.<br>
-Right: letter system I use to draw the 8 different panes.</figcaption>
+  <figcaption> Left: centres of the rhombuses.<br>
+Right: letter system I use to draw the 8 different rhombuses.</figcaption>
 </figure>
 
 > To **iterate over our rhombuses**, I use this function:<br>

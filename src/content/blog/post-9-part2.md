@@ -112,7 +112,7 @@ Another problem I had was that my smaller rhombohedrons did not fit the shape of
   <img src="/rhombohedron/no_rhombohedron.png" alt="No rhombohedron" title="No rhombohedron">
 </figure>
 
-I solved this by changing the parameters in `rhombohedrons.extend(generate_rhombohedro(...))`. This is because we also need to shrink our origin_vertices by 1/3 and this in each dimension.
+I solved this by changing the parameters in `rhombohedrons.extend(generate_rhombohedron(...))`. This is because we also need to shrink our origin_vertices by 1/3 and this in each dimension.
 ```python
     # Before
     rhombohedrons.extend(generate_rhombohedron(x + dimension_x * new_size, y + dimension_y * new_size, z + dimension_z * new_size, new_size, max_level - 1))
