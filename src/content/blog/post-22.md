@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/BlogpostLayout.astro
-title: 'End'
-pubDate: '05/01/2025'
+title: 'End Summary'
+pubDate: '07/02/2025'
 description: 'In this blog post, I reflect on my passion project: exploring 3d fractals. It is a summary of the things I did with explanations of the choices I made along the way. Sometimes I refer to other blog posts if necessary.'
 ---
 ## Intro
@@ -21,7 +21,7 @@ At that moment, I chose to place everything what I had done in categories so tha
 I found the **Sierpinski fractals** interesting and decided to delve deeper into them. I then came across this image and thought instead of putting 2 Sierpinski triangles on it what would happen if you made a **rhombus** out of it. And so another more defined goal emerged for me to continue with this one, even though I know it is **very similar to the menger sponge**, it is just a bit **more complicated** to make because of its shape. (A cube is something you can find most of the times in various libraries).
 \
 \
-➡ Read more about my exploration phase: <a href="/post-2">post 2</a>, <a href="/post-3">post 3</a>, <a href="/post-4">post 4</a>, <a href="/post-5">post 5</a>, <a href="/post-6">post 6</a>, <a href="/post-7">post 7</a>.
+➡ Read more about my exploration phase: <a href="/post-2/">post 2</a>, <a href="/post-3/">post 3</a>, <a href="/post-4/">post 4</a>, <a href="/post-5/">post 5</a>, <a href="/post-6/">post 6</a>, <a href="/post-7/">post 7</a>.
 ___
 But for now, I will take you on a code journey about my process of **exploring the rhombohedron fractal with code**.
 So this blog post is more like a technical article with several chapters.
@@ -32,7 +32,7 @@ Chapter overview:
 - Chapter 2: 2d creation
 - Chapter 3: From 2d to 3d
 - Chapter 4: Bring it to life with iteraction
-- Chapter 5: Future, proposal
+- Chapter 5: Future proposal
 - Chapter 6: Project conclusion
 
 ### Chapter 1
@@ -263,7 +263,7 @@ Since this may not have been entirely clear, I'd like to post another picture of
   <figcaption>Figure 4: Lego menger sponge</figcaption>
 </figure>
 
-For the **rhombohedron fractal**, I could reuse the rhombohedron code and the menger sponge code. The **hardest part** here was **determining the new x, y & z coordinates**. See <a href="/post-9-part2">blog post part 2</a>.
+For the **rhombohedron fractal**, I could reuse the rhombohedron code and the menger sponge code. The **hardest part** here was **determining the new x, y & z coordinates**. See <a href="/post-9-part2/">blog post part 2</a>.
 \
 \
 ➡ Final code: <a href="https://github.com/Joline990/3D_Fractals/tree/main/demos/Python">demos > Python</a>.
@@ -292,10 +292,56 @@ This was actually quite easy, as I had already written the code, only in Blender
 See <a href="/post-11/#step-by-step">blog post</a>.
 
 ### Chapter 4
-Another milestone of my project was completed! First I did a lot of research on fractals, then I created a 2d rhombus fractal and now I finished making it in 3d. So it was time time to add some **interactivity**.
+Another milestone of my project was completed! First I did a lot of research on fractals, then I created a 2d rhombus fractal and now I finished making it in 3d. So it was time to add some **interactivity**.
 \
 \
 I was stuck for a while. I had looked up information on interactivity in Python and Blender's Python API, but I was overwhelmed and didn't really see how to start interacting until I came across **custom panels** at some point. I got to know Blender's UI better from a purely development side by using the scripting tab.
+
+#### Custom panel - my workflow
+I saw people using **custom panels** to **customize & optimize their workflow** in Blender. Instead of having to click several times before creating something, they could **do it with 1 click**. From that idea, I thought of also creating such a custom panel with the things I wanted to change, that way I could put interactivity in Blender.
+\
+\
+I have done **quite a bit of research** on creating such a custom panel and also on **custom operators** and **custom properties** as these are associated with creating a custom panel. It did take me a while to understand it, also because I had never worked in Blender before this project. But the videos by **Victor Stepanov** were a great help.
+\
+\
+After experimenting a bit with a cube to incorporate this new knowledge, I took my list of things I wanted to make interactive. First, I made the things that were possible for a simple cube (color, rotation & size). Then I moved on to the fractal code to implement these things and adjust them and add the other elements that I had not yet implemented (acute angle, max level...).
+\
+\
+➡ Blog posts about the custom panels that explain more: <a href="/post-13/">post 13</a>, <a href="/post-14/">post 14</a>, <a href="/post-15/">post 15</a>
+\
+\
+In the next section, I briefly list what I learned about making a panel and what my experiences are.
+
+#### Custom panel - what I learned 
+What I learned at this stage:
+- creating a **basic panel**
+  - giving a **location** to your panel. 
+  - creating a **layout** using row(), column(), box(), split()...
+- creating an **add-on** & integrate it into a new Blender project
+  - bl_info, register() & unregister()
+- creating a **custom operator with custom properties inside**. For example, when you click on the operator button you can then see a popup dialog with your custom properties inside -> I tried this for a while, but noticed that you had to click twice for the desired result, so I didn't go into it any further.
+- creating **PropertyGroups** with ... different properties in there that you define by their type (e.g. float, int, boolean...)
+- **Python console** -> I know what it is, but didn't go into that because I could do it without it. Also, I didn't quite understand how you can test certain things, how you know that you need that particular thing to test.
+- **Terminal** -> I always checked for errors, because they were not always displayed in the INFO. In the blog post, you can read how I dealt with various errors I encountered.
+- creating **subpanels** -> I was curious how to do this, but did not need it for the end result.
+- hide Blender interfaces to make fullscreen nicer (hide axes, pivot point, change background...)
+<br><br>
+
+**3 difficult things** at this stage:
+- creating a **color picker with r, g, b values separated** -> but I managed thanks to tutorials.
+- **rotation changer** -> I wanted when a user changes the rotation and then adjust another item that generates a new fractal (and removes the old one), that the rotation is preserved. By taking a copy of the rotation before removing the fractal and then using it when a new fractal is created, I managed to integrate it in the project.
+- **size changer** -> Same as rotation. The size should be kept if there is a new fractal . The shape should not shrink or grow. I tried all sorts of things, tried things people said on forums, but it just didn't seem to work. I think the problem has to do with the fact that when I create my fractal again I also need the size to generate that fractal in the generate_fractal() function. I did not manage to implement it.
+<br><br>
+
+➡ Blog posts about trying to make interactions like the color picker:
+<a href="/post-13/">post 13</a>, <a href="/post-15/">post 15</a>, <a href="/post-17/">post 17</a>, <a href="/post-18/">post 18</a>, <a href="/post-19/">post 19</a>, <a href="/post-20/">post 20</a>.
+
+#### MIDI controller
+For connecting the midi controller to the project, I found the **MidiController add-on** that I used to connect my MIDI device in my Blender's project. Unfortunately, I noticed later that this does **not work for the pads**. I didn't delve into this code to find out if I would be able to modify it, so pads can be added like a button. Furthermore, no add-ons could be found that connected midi. Looking at the code, this seemed like a lot of setup work. I thought I could make better use of that time.
+
+> The nice thing about linking the **midi controller** is that you can **manipulate multiple items at the same time**. It is also **easier to change properties** than using the mouse cursor.
+>
+>(The messages come in one by one, but this happens quickly, so our eyes don't notice).
 
 #### Reflection
 Somewhat I do **regret** that I focused for a long time on interactivity in blender and didn't think to go **export the rhombohedron fractal model** and use it anywhere else. 
@@ -311,31 +357,53 @@ I might have had the insight to export the model earlier if I didn't start delvi
 So at the last coach moment, I got this insight. For example, that I could import my model into TouchDesigner and start changing things there. It also came up in an earlier coach moment, but then **I hadn't made the link** (see in the green box above).
 \
 \
-Since there is no more time to learn new things within this timeframe of the project, I have to continue in blender's python api. 
+Since there is no more time to learn new things within this timeframe of the project, I continued in blender's python api. 
 
-#### Add interactivity in project
-ADD CONTENT HERE ABOUT ADDING INTERACTIVITY IN BLENDER's PYTHON API + MIDI CONTROLLER
+### Chapter 5
+My **curiosity** can hardly stop me from this project just to focus on blender's python api.  I wanted to go back and take a **broader look** at what the other options were. So I did some **research**.
 
-
-### Chapter 5 -> WRITE THAT BETTER AFTER THE END RESULT IF I WANT TO DO SOME MORE RESEARCH ABOUT IT!!!!!!!!!
-I was too curious, so I tested it out in TouchDesigner by exporting my model and importing it in TouchDesigner and changed the camera position based on the input of the midi controller. 
-It was easy to do this, because I found already some tutorials.
+#### TouchDesigner
+As told at coach moment, I could import my 3d fractal from blender into **TouchDesigner** and make adjustments there, I could then also implement audio. 
+I found 2 helpful videos how to **import my 3d fractal model from blender** & using a **midi operator** I can set up my midi device. Then I could read the messages and add interaction to the model.
+So it would definitely be possible to apply it in this. Just how I would adjust **specific fractal properties** such as number of levels, acute angle.... I would then have to **figure out** if this would work in this environment. And also how with audio that when the user turns a control slider for example that the music adjusts.
 \
 \
-I haven't looked further on how to change the level for example, the angle, the color...
-Also I could add some audio feedback in TouchDesigner.
+➡ Blog post: <a href="/post-19/#touchdesigner">Fractal in TouchDesigner with MIDI control</a>
+
+#### Python-rtmidi
+I also wanted to try if I could modify a fractal property using **pads**, because it wasn't possible in the MidiController add-on. For that, I took a new **standalone Python project**, outside Blender's environment. I saw the MidiController add-on used **python-rtmidi library**, among other things. So I looked for some more information on that. I also came across **mido library**. But python-rtmidi is just a bit faster than mido, so for real-time adjustments, python-rtmidi is more suitable. 
+\
+\
+I still **convert my rhombohedron fractal to pygame & pyopengl** first anyway, because it's better than using matplotlib. I had already created my cube & menger sponge in pygame and pyopengl anyway, so it was just a matter of putting my rhombohedron code in there and tweaking here and there. 
+> **Coding is like a boomerang** 🪃:
+>
+> things you once stopped doing always come back.
+
+Since I had already put **all my interactions in blender's python api** and this was working, it would be **a bit silly** to start implementing all those here too. So I chose only to add toggle inverse visibility. I managed to work through a pad!
+\
+\
+Changing fractal properties would work here, maybe sound is trickier here than in TouchDesigner. But I haven't done any research in audio (except audio-reactive projects in touchdesigner).
+\
+\
+Inserting a simple python-rtmidi script into Blender, doesn't work. After testing this, I saw the colorful loader. 
+
+#### Conclusion
+So the two mini-experiments (standalone python with python-rtmidi, pygame & pyopengl and touchdesigner) both get you **out of blender's interface**. So which would be ideal should I later use this in an installation or as a background to 1 or other music band....
 
 ### Chapter 6
-But despite perhaps I not always made the right choice or workflow, I did learn a lot in this project. I have not only learned about the subject, but also learned more about myself. Working on 1 project for a month without much feedback makes you encounter yourself more often.
-\
-\
-I enjoyed studying fractals more closely and trying to understand how they are formed. In the end, it is an algorithm that repeats itself and the hardest part is determining (new) coordinates of the vertices, but a sketch helped with this.
+But despite perhaps I not always made the right choice or workflow, I learned a lot in this project. I have not only learned about fractals, but also learned more about myself. 
+
+> Working on 1 project for a month without much feedback makes you encounter yourself more often.
+
+I enjoyed studying fractals more closely and trying to understand how they are formed. In the end, it is an algorithm that repeats itself and a difficult part is determining (new) coordinates of the vertices, but a sketch can help with this.
 \
 \
 It's also a lot of searching, which sometimes made me feel like I was getting **completely lost on the internet** because it's just so big. You keep finding things! 
 \
 \
-I think this summary pretty much sums up my blog posts. I hope it is clear. I tried to write more about the choices I made and why, what I learnt, what I got stuck with...
+I think this summary pretty much sums up my blog posts. I hope it is clear. I tried to write more about the choices I made and why, what I learned, with which I was stuck
 \
 \
 I hope this brings more structure to this project, because I know sometimes I have researched all sorts of things, but even those are things you take with you even if they didn't come in handy in this project. I notice when looking back at the various blog posts that indeed, sometimes I went in all directions. But that is normal, because **a process does not go in 1 flowing line** unless you imitate everything 1 other person has done.
+
+> **Note**: not all details are included in this summary, so to know (almost) everything -> read the blog posts!

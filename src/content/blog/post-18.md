@@ -12,7 +12,7 @@ description: 'Today I started making the rhombohedron fractal interactive.'
 
 ## Interactive rhombohedron fractal
 ### 1 Rhombohedron
-On Monday, I was able to get my mixer sponge to change levels. I now want to apply the same logic for my rhombohedron fractal. But first I want the different mini-rhombohedrons to form 1 object. A classmate gave me a tip that you can use `control + J` to join all objects. Indeed, if I select everything, and do control + J, I have 1 object. Now let's implement this in the code.
+On Monday, I was able to get my menger sponge to change levels. I now want to apply the same logic for my rhombohedron fractal. But first I want the different mini-rhombohedrons to form 1 object. A classmate gave me a tip that you can use `control + J` to join all objects. Indeed, if I select everything, and do control + J, I have 1 object. Now let's implement this in the code.
 \
 \
 Let's make use of what we see in our INFO.
