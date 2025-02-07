@@ -165,14 +165,43 @@ Then I wanted to test out python-rtmidi with my fractal. Since I had placed all 
 \
 \
 My steps were:
-1. Make rhombohedron in pygame & pyopengl (because they are better to render 3d graphics than matplotlib). I had already made the cube and blender sponge. So I could refresh pyopengl & pygame again and put in the code of my rhombohedron. I prepared the setup for pygame & pyopengl and drew a rhombohedron using faces and vertices.
-2. I turned the rhombohedron into a fractal.
+1. Make rhombohedron in pygame & pyopengl (because they are better to render 3d graphics than matplotlib). 
+    I had already made the cube and blender sponge. So I could refresh pyopengl & pygame again and put in the code of my rhombohedron. I prepared the setup for pygame & pyopengl and drew a rhombohedron using faces and vertices.
+    \
+    \
+    It took some fiddling to position my fractal roughly in the centre of the screen.
+    ```python
+    gluPerspective(45, (screen_width/screen_height), 1.0, 10.0) # angle in degrees, aspect ratio, znear & zfar clipping planes
+    glTranslatef(-3,-2,-10)
+    glScale(3, 3, 3)
+    ```
+    My `screen_width` & `screen_height` are used to get the size of the fullscreen pygame window (see below).
+    ```python
+    screen_width, screen_height = screen.get_size()
+    # code from: https://www.geeksforgeeks.org/how-to-get-the-size-of-pygame-window/
+    ```
+
+2. I turned the rhombohedron into a fractal by adding a recursive function.
+    ```python
+    # Got error
+    RecursionError: maximum recursion depth exceeded in comparison
+    ```
+    Solved by: adding a return! (This is the exit condition so our computer doesn't run into infinity).
+    \
+    \
+    It is difficult to see my rhombohedron fractal, so I added a different color to each face. I could also use shading & lighting or other texture, but that is more complex and this is just an experiment. 
+    ```python
+    for i, face in enumerate(FACES):
+            glColor3fv(FACE_COLORS[i])
+    ```
+    The for loop is based on this code: https://github.com/Rabbid76/PyGameExamplesAndAnswers/blob/master/examples/pygame_opengl/immediate_mode/pygame_opengl_begin_end_cube_outline_2.py
+    <br><br>
+
 3. I added MIDI by copying that code and looking for the right message.
+> To make the midi pad work like a toggle button you put on and then take off (2 clicks), I first have to pass in the **editor** of my midi device **type: ‘toggle’** to my device (**send to ram**).
 <br><br>
 
 You can find the code on Github with these 3 steps inside the `midi` folder.
-
-> To make the midi pad work like a toggle button you put on and then take off (2 clicks), I first have to pass in the **editor** of my midi device **type: ‘toggle’** to my device (**send to ram**).
 
 #### Fullscreen pygame
 I wanted to know how the pygame environment can take the full width & height of my screen. This is what I found:
